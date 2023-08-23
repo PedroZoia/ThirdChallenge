@@ -3,6 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import Modal from "../../components/Modal";
 import logo from "../../assets/img/logo-uolkut-simples.svg";
+import { auth, db, doc, setDoc } from "../../firebase.js";
+import { User } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import firebase from 'firebase/app';
+import jwt from 'jsonwebtoken';
 import {
     CreateAccountButton,
     CustomCheckboxInput,
@@ -46,27 +52,33 @@ function LoginForm() {
     const [registrationError, setRegistrationError] = useState('');
     const [isForgotPassword, setIsForgotPassword] = useState(false);
     const [recoveryEmail, setRecoveryEmail] = useState('');
+    const navigate = useNavigate();
+
 
 
     useEffect(() => {
-        setUserIsLogged(false);
-    }, [setUserIsLogged]);
+        const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+            if (user) {
+                setUserIsLogged(true);
+                navigate('/profile');
+            } else {
+                setUserIsLogged(false);
+            }
+        });
+
+        return () => unsubscribe();
+    }, [setUserIsLogged, navigate]);
 
     // Handle the login process. Validates the email and password, displays errors if needed, and handles successful login. Is called when the form is submitted.
     const handleLogin = () => {
-        if (!email || !password || !isValidEmail(email)) {
-            setIsLoginAttempted(true);
-            setEmailError(email ? (isValidEmail(email) ? '' : 'Formato de e-mail inválido.') : 'Campo de e-mail não pode ser vazio.');
-            setPasswordError(password ? '' : 'Campo de senha não pode ser vazio.');
-            setLoginError('');
-        } else {
-            setIsLoginAttempted(false);
-            setEmailError('');
-            setPasswordError('');
-            setLoginError('');
-            setUserIsLogged(true);
-            navigate('/profile');
-        }
+        signInWithEmailAndPassword(auth, email, password)
+            .then(() => {
+                setUserIsLogged(true);
+                navigate('/profile');
+            })
+            .catch((error: any) => {
+                setLoginError("Erro na autenticação: " + error.message);
+            });
     };
 
     // Validates the email format. Returns true if the email is valid, otherwise false.
@@ -109,8 +121,6 @@ function LoginForm() {
         handleLoginOrRegister();
     };
 
-    const navigate = useNavigate();
-
     // Navigates to the create profile page.
     const handleCreateProfile = () => {
         setIsRegistrationForm(true);
@@ -126,7 +136,7 @@ function LoginForm() {
         setIsRegistrationForm(false);
     };
 
-    const handleRegistration = () => {
+    const handleRegistration = async () => {
         // Validações
         if (!isValidEmail(email)) {
             setRegistrationError('Formato de e-mail inválido.');
@@ -143,11 +153,38 @@ function LoginForm() {
             return;
         }
 
-        // Aqui, você normalmente faria uma chamada API para registrar o usuário.
-        // Mas para este exemplo, vamos apenas atualizar o contexto do usuário.
+        createUserWithEmailAndPassword(auth, email, password)
+        .then(async (userCredential) => {
+            const uid = userCredential.user.uid;
+            const userData: any = {
+                email,
+                birthDate,
+                profession,
+                country,
+                city,
+                relationship
+            };
+            
+            // Criando um JWT
+            const token = jwt.sign(userData, '12345', { expiresIn: '1h' });
 
-        setUserIsLogged(true);
-        navigate('/profile');
+
+            userData['token'] = token;
+
+            
+
+            // Estendendo userData para incluir o JWT
+            userData.token = token;
+
+            // Salvando os dados do usuário e o JWT no Firestore
+            await setDoc(doc(db, "users", uid), userData);
+            
+            setUserIsLogged(true);
+            navigate('/profile');
+        })
+        .catch((error: any) => {
+            setRegistrationError("Erro no registro: " + error.message);
+        });
     };
 
     const handleLoginOrRegister = () => {
@@ -178,7 +215,7 @@ function LoginForm() {
                     <ForgotPasswordLink onClick={handleBackToLogin}>
                         Lembrou sua senha?
                     </ForgotPasswordLink>
-                    <ForgotPasswordLinkb onClick={handleBackToLogin}className="credentials-button">
+                    <ForgotPasswordLinkb onClick={handleBackToLogin} className="credentials-button">
                         Entrar com as credenciais
                     </ForgotPasswordLinkb>
                 </>
@@ -245,16 +282,16 @@ function LoginForm() {
                                         placeholder="Cidade"
                                     />
                                 </div>
-                                <RelationshipSelect 
-    value={relationship}
-    onChange={(e) => setRelationship(e.target.value)}
->
-    <option value="Solteiro">Solteiro</option>
-    <option value="Casado">Casado</option>
-    <option value="Divorciado">Divorciado</option>
-    <option value="Namorando">Namorando</option>
-    <option value="Preocupado">Preocupado</option>
-</RelationshipSelect>
+                                <RelationshipSelect
+                                    value={relationship}
+                                    onChange={(e) => setRelationship(e.target.value)}
+                                >
+                                    <option value="Solteiro">Solteiro</option>
+                                    <option value="Casado">Casado</option>
+                                    <option value="Divorciado">Divorciado</option>
+                                    <option value="Namorando">Namorando</option>
+                                    <option value="Preocupado">Preocupado</option>
+                                </RelationshipSelect>
                                 {isLoginAttempted && registrationError && (
                                     <ErrorContainer>
                                         <ErrorMessage>{registrationError}</ErrorMessage>
