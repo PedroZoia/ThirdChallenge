@@ -21,7 +21,10 @@ export const EditFormContainer = styled.div`
     font-size: 1rem; 
     font-style: normal;
     font-weight: 400;
+    width: 215px;
+    height: 51px;
     color: var(--dark-20);
+    fill: #EFF3F8;
   }
 
   p {
@@ -49,5 +52,3 @@ export const EditFormContainer = styled.div`
     width: 100%; 
   }
 `;
-
-
