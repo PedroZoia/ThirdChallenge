@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "email": "pedro@email.com",
+      "password": "$2a$10$toWTEaCfWsYF70q02sOtT.F9G26QpKmsZyxhCRSAEdPLFB9gr2boG",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 1
+    },
+    {
+      "email": "pedro1@email.com",
+      "password": "$2a$10$7UHDyo5JrzT3cdIAOasP4uZqTdLoLOdUswRz1VMJEJSDgN5jILOuS",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 2
+    },
+    {
+      "email": "pedro2@email.com",
+      "password": "$2a$10$cOQ6Vf41JsOwY7iVZVg4XecY9yhtSuRXrgOM2qP97lDNVvVFbW13S",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 3
+    },
+    {
+      "email": "pedro3@email.com",
+      "password": "$2a$10$WljY/5v9NbjXcp5nHl737uld2X6Ywqw28xSoibBLt5tazs6tOI3Xy",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "Namorando",
+      "id": 4
+    },
+    {
+      "email": "joao@email.com",
+      "password": "$2a$10$OTR2zXN3EcWmyB6TwmutnOmT7LW4fmDFHrp2VaVOxwtvEppfbJnpm",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 5
+    }
+  ]
+}

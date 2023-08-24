@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/user-context';
 import Modal from "../../components/Modal";
 import logo from "../../assets/img/logo-uolkut-simples.svg";
+import axios from 'axios';
 import {
     CreateAccountButton,
     CustomCheckboxInput,
@@ -26,6 +27,19 @@ import {
     RememberMeContainer,
     RememberMeText,
 } from './style';
+import { response } from 'express';
+import { error } from 'console';
+
+
+interface User {
+    email: string;
+    password: string;
+    birthDate?: string;
+    profession?: string;
+    country?: string;
+    city?: string;
+    relationship?: string;
+}
 
 function LoginForm() {
     const [email, setEmail] = useState('');
@@ -52,20 +66,29 @@ function LoginForm() {
         setUserIsLogged(false);
     }, [setUserIsLogged]);
 
+
     // Handle the login process. Validates the email and password, displays errors if needed, and handles successful login. Is called when the form is submitted.
-    const handleLogin = () => {
+    const handleLogin = async () => {
         if (!email || !password || !isValidEmail(email)) {
             setIsLoginAttempted(true);
             setEmailError(email ? (isValidEmail(email) ? '' : 'Formato de e-mail inválido.') : 'Campo de e-mail não pode ser vazio.');
             setPasswordError(password ? '' : 'Campo de senha não pode ser vazio.');
             setLoginError('');
         } else {
-            setIsLoginAttempted(false);
-            setEmailError('');
-            setPasswordError('');
-            setLoginError('');
-            setUserIsLogged(true);
-            navigate('/profile');
+            let profile = {
+                email: email,
+                password: password,
+
+            }
+            console.log(profile)
+            const response = await axios.post('http://localhost:3000/login', profile).then((response)=>{
+                console.log(response)
+                let data = response.data;
+             setUserIsLogged(true);
+             navigate('/profile');
+            }).catch((error)=>{console.log(error)});
+
+            console.log(response); 
         }
     };
 
@@ -106,7 +129,6 @@ function LoginForm() {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsFormSubmitted(true);
-        handleLoginOrRegister();
     };
 
     const navigate = useNavigate();
@@ -126,37 +148,44 @@ function LoginForm() {
         setIsRegistrationForm(false);
     };
 
-    const handleRegistration = () => {
-        // Validações
-        if (!isValidEmail(email)) {
-            setRegistrationError('Formato de e-mail inválido.');
-            return;
+    const handleRegistration = async () => {
+        console.log("Botão 'Criar Conta' foi clicado!"); // Adicione esta linha
+
+        // if (!isValidEmail(email)) {
+        //     setRegistrationError('Formato de e-mail inválido.');
+        //     return;
+        // }
+    
+        // if (!isValidBirthDate(birthDate)) {
+        //     setRegistrationError('Data de nascimento inválida.');
+        //     return;
+        // }
+    
+        // if (![password, profession, country, city, relationship].every(isNotEmpty)) {
+        //     setRegistrationError('Todos os campos são obrigatórios para o registro.');
+        //     return;
+        // }
+    
+            let user = {
+                email: email,
+                password: password,
+                birthDate: birthDate,
+                profession: profession,
+                country: country,
+                city: city,
+                relationship: relationship
+
+            }
+            console.log(user)
+            const response = await axios.post('http://localhost:3000/register', user).then((response)=>{
+                console.log(response)
+                let data = response.data;
+             setUserIsLogged(true);
+             navigate('/');
+            }).catch((error)=>{console.log(error)});
+
+            console.log(response); 
         }
-
-        if (!isValidBirthDate(birthDate)) {
-            setRegistrationError('Data de nascimento inválida.');
-            return;
-        }
-
-        if (![password, profession, country, city, relationship].every(isNotEmpty)) {
-            setRegistrationError('Todos os campos são obrigatórios para o registro.');
-            return;
-        }
-
-        // Aqui, você normalmente faria uma chamada API para registrar o usuário.
-        // Mas para este exemplo, vamos apenas atualizar o contexto do usuário.
-
-        setUserIsLogged(true);
-        navigate('/profile');
-    };
-
-    const handleLoginOrRegister = () => {
-        if (isRegistrationForm) {
-            handleRegistration();
-        } else {
-            handleLogin();
-        }
-    };
 
     return (
         <LoginFormContainer>
@@ -178,7 +207,7 @@ function LoginForm() {
                     <ForgotPasswordLink onClick={handleBackToLogin}>
                         Lembrou sua senha?
                     </ForgotPasswordLink>
-                    <ForgotPasswordLinkb onClick={handleBackToLogin}className="credentials-button">
+                    <ForgotPasswordLinkb onClick={handleBackToLogin} className="credentials-button">
                         Entrar com as credenciais
                     </ForgotPasswordLinkb>
                 </>
@@ -216,7 +245,6 @@ function LoginForm() {
 
                         {isRegistrationForm ? (
                             <>
-                                {/* Campos adicionais para o formulário de registro */}
                                 <div className="inputRow">
                                     <BirthDateInput
                                         type="date"
@@ -245,22 +273,22 @@ function LoginForm() {
                                         placeholder="Cidade"
                                     />
                                 </div>
-                                <RelationshipSelect 
-    value={relationship}
-    onChange={(e) => setRelationship(e.target.value)}
->
-    <option value="Solteiro">Solteiro</option>
-    <option value="Casado">Casado</option>
-    <option value="Divorciado">Divorciado</option>
-    <option value="Namorando">Namorando</option>
-    <option value="Preocupado">Preocupado</option>
-</RelationshipSelect>
+                                <RelationshipSelect
+                                    value={relationship}
+                                    onChange={(e) => setRelationship(e.target.value)}
+                                >
+                                    <option value="Solteiro">Solteiro</option>
+                                    <option value="Casado">Casado</option>
+                                    <option value="Divorciado">Divorciado</option>
+                                    <option value="Namorando">Namorando</option>
+                                    <option value="Preocupado">Preocupado</option>
+                                </RelationshipSelect>
                                 {isLoginAttempted && registrationError && (
                                     <ErrorContainer>
                                         <ErrorMessage>{registrationError}</ErrorMessage>
                                     </ErrorContainer>
                                 )}
-                                <LoginButton type="submit">Criar Conta</LoginButton>
+                                <LoginButton type="submit" onClick={handleRegistration}>Criar Conta</LoginButton>
                             </>
                         ) : (
                             <>
@@ -282,7 +310,7 @@ function LoginForm() {
                                     </label>
                                 </RememberMeContainer>
 
-                                <LoginButton type="submit">Entrar na conta</LoginButton>
+                                <LoginButton type="submit" onClick={handleLogin}>Entrar na conta</LoginButton>
                                 <CreateAccountButton type="button" onClick={handleCreateProfile}>
                                     Criar uma conta
                                 </CreateAccountButton>
