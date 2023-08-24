@@ -6,50 +6,55 @@ function EditForm() {
     <EditFormContainer>
       <h3>Editar informações</h3>
       <div>
-        <h2>Profissão: </h2>
-        <p>
-          Solteiro
+        <h2>Profissão: <p>
+        
         </p>
+        </h2>
+        
+        <h2>Relacionamento</h2>
       </div>
       <div>
-        <h2>Cidade:</h2>
-        <p>
-          21 de julho
+        <h2>Cidade:<p>
+      
         </p>
+        </h2>
+        
       </div>
       <div>
-        <h2>País:</h2>
-        <p>
-          22
+        <h2>País:<p>
+        
         </p>
+        </h2>
+        
       </div>
       <div>
-        <h2>DD/MM/AA:</h2>
-        <p>
-          Solteiro
+        <h2>DD/MM/AA:<p>
+  
         </p>
+        </h2>
+        
       </div>
       <div>
-        <h2>Senha:</h2>
-        <p>
-          Programador
+        <h2>Senha:<p>
+ 
         </p>
+        </h2>
+        
       </div>
 
- 
- 
-   
       <div>
-        <h2>Repetir senha:</h2>
-        <p>
-          Guarantã
+        <h2>Repetir senha:<p>
+        
         </p>
+        </h2>
+        
       </div>
       <div>
-        <h2>País:</h2>
-        <p>
-          Brasil
+        <h2>País:<p>
+     
         </p>
+        </h2>
+        
       </div>
       <div>
         <button>Salvar</button>

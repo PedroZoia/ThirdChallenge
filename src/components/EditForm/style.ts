@@ -24,13 +24,21 @@ export const EditFormContainer = styled.div`
     width: 215px;
     height: 51px;
     color: var(--dark-20);
+    position: relative;
+    background-image: url('../../assets/img/background-edit.svg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 20px;
+    display: flex;
+    align-items: center;
   }
 
-  p {
+  h2 p {
     font-size: 1rem; 
     font-style: normal;
     font-weight: 400;
     color: var(--dark-10);
+    margin: 0;
   }
 
   > h3 {
