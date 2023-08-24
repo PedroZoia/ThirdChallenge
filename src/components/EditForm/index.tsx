@@ -51,6 +51,9 @@ function EditForm() {
           Brasil
         </p>
       </div>
+      <div>
+        <button>Salvar</button>
+      </div>
     </EditFormContainer>
   );
 }

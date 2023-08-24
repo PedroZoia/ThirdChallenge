@@ -24,7 +24,6 @@ export const EditFormContainer = styled.div`
     width: 215px;
     height: 51px;
     color: var(--dark-20);
-    fill: #EFF3F8;
   }
 
   p {
@@ -50,5 +49,20 @@ export const EditFormContainer = styled.div`
 
   @media (max-width: 48rem) {
     width: 100%; 
+  }
+
+  button {
+    width: 21rem;
+    height: 3.188rem;
+    border:none;
+    border-radius: 0.5rem; 
+    color: var(--dark-40);
+    background-color: var(--brand-color);
+    font-size: 1.125rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
   }
 `;
