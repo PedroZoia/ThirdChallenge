@@ -48,7 +48,7 @@ function LoginForm() {
     const [profession, setProfession] = useState('');
     const [country, setCountry] = useState('');
     const [city, setCity] = useState('');
-    const [relationship, setRelationship] = useState('');
+    const [relationship, setRelationship] = useState('Solteiro');
     const [emailError, setEmailError] = useState('');
     const [passwordError, setPasswordError] = useState('');
     const [isLoginAttempted, setIsLoginAttempted] = useState(false);
@@ -151,20 +151,23 @@ function LoginForm() {
     const handleRegistration = async () => {
         console.log("Botão 'Criar Conta' foi clicado!");
 
-        // if (!isValidEmail(email)) {
-        //     setRegistrationError('Formato de e-mail inválido.');
-        //     return;
-        // }
+        if (!isValidEmail(email)) {
+            console.log("Falha na validação do email");
+            setRegistrationError('Formato de e-mail inválido.');
+            return;
+        }
     
-        // if (!isValidBirthDate(birthDate)) {
-        //     setRegistrationError('Data de nascimento inválida.');
-        //     return;
-        // }
+        if (!isValidBirthDate(birthDate)) {
+            console.log("Falha na validação Data nascimento");
+            setRegistrationError('Data de nascimento inválida.');
+            return;
+        }
     
-        // if (![password, profession, country, city, relationship].every(isNotEmpty)) {
-        //     setRegistrationError('Todos os campos são obrigatórios para o registro.');
-        //     return;
-        // }
+        if (![password, profession, country, city, relationship].every(isNotEmpty)) {
+            console.log("Falha na validação de algum requisito");
+            setRegistrationError('Todos os campos são obrigatórios para o registro.');
+            return;
+        }
     
         let user = {
             email: email,

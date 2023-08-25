@@ -79,6 +79,26 @@
       "city": "a",
       "relationship": "",
       "id": 8
+    },
+    {
+      "email": "valida@email.com",
+      "password": "$2a$10$jRh1r3q.wiki3lEzWwYzk.H9MayxLZ6tusjG5oI7Fydld8mhrrodK",
+      "birthDate": "2001-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "Casado",
+      "id": 9
+    },
+    {
+      "email": "testefinal@email.com",
+      "password": "$2a$10$e9sy9tfZkddKYgebp7mit.emMqw7MbiLcx/pRHuhSnQ7wLvHqHmHS",
+      "birthDate": "2001-06-26",
+      "profession": "Dev",
+      "country": "Brasil",
+      "city": "São Carlos",
+      "relationship": "Solteiro",
+      "id": 10
     }
   ]
 }
