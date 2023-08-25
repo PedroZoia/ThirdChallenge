@@ -49,6 +49,36 @@
       "city": "a",
       "relationship": "",
       "id": 5
+    },
+    {
+      "email": "teste@email.com",
+      "password": "$2a$10$v5tWIy9CbMQb5pnYGciiw.wJYR5UDeeAzV9.YqSE.KvxmzZOGZ/mC",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 6
+    },
+    {
+      "email": "teste1@email.com",
+      "password": "$2a$10$zMcPfYmcidwuLWh54/JfuO1wjIo7NwDRMtlPt7DnCBjS6nxn76Ya.",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 7
+    },
+    {
+      "email": "gabriel@email.com",
+      "password": "$2a$10$y9D2.0slrOfPQAZfQFykLOZtD5wtowHp6MgUjmc.2H0E0JK7na.oi",
+      "birthDate": "0010-10-10",
+      "profession": "a",
+      "country": "a",
+      "city": "a",
+      "relationship": "",
+      "id": 8
     }
   ]
 }

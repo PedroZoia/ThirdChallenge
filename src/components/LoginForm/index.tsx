@@ -149,7 +149,7 @@ function LoginForm() {
     };
 
     const handleRegistration = async () => {
-        console.log("Botão 'Criar Conta' foi clicado!"); // Adicione esta linha
+        console.log("Botão 'Criar Conta' foi clicado!");
 
         // if (!isValidEmail(email)) {
         //     setRegistrationError('Formato de e-mail inválido.');
@@ -166,26 +166,31 @@ function LoginForm() {
         //     return;
         // }
     
-            let user = {
-                email: email,
-                password: password,
-                birthDate: birthDate,
-                profession: profession,
-                country: country,
-                city: city,
-                relationship: relationship
-
-            }
-            console.log(user)
-            const response = await axios.post('http://localhost:3000/register', user).then((response)=>{
-                console.log(response)
-                let data = response.data;
-             setUserIsLogged(true);
-             navigate('/');
-            }).catch((error)=>{console.log(error)});
-
-            console.log(response); 
+        let user = {
+            email: email,
+            password: password,
+            birthDate: birthDate,
+            profession: profession,
+            country: country,
+            city: city,
+            relationship: relationship
         }
+    
+        console.log(user)
+    
+        const response = await axios.post('http://localhost:3000/register', user).then((response) => {
+            console.log(response)
+            let data = response.data;
+    
+            setIsRegistrationForm(false);  // Adicione esta linha
+            navigate('/');
+    
+        }).catch((error) => {
+            console.log(error)
+        });
+    
+        console.log(response);
+    }
 
     return (
         <LoginFormContainer>
