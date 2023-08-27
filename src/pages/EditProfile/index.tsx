@@ -26,8 +26,6 @@ function EditProfile() {
       <UserProfileHeader
         name="Iuri Silva"
         status="Solteiro, Brasil"
-        buttonContent="Salvar"
-        handleButton={handleModal}
       />
       </ProfileSide>
       <EditForm />

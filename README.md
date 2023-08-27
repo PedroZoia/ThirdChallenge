@@ -1,6 +1,5 @@
 
-<p>This project represents the third challenge of the Compass.UOL Scholarship Program,. The primary objective was to develop 
-  a website inspired by the classic social networking platform, Orkut. Our task involved creating a responsive web application with various distinct page routes, 
+<p>This project represents the third challenge of the Compass.UOL Scholarship Program. The task involved creating a responsive web application with various distinct page routes, 
   enabling users to access different sections seamlessly on various devices. Additionally, we implemented a user registration and login system to enhance the overall user experience.</p>
 
 ## List of Features:
@@ -19,6 +18,7 @@
 
 1. **Requirements:**
    - Node.js installed (with npm - Node Package Manager).
+   - Axios installed.
 
 2. **Cloning the repository:**
    - git clone <repository_url>
@@ -28,9 +28,12 @@
    - cd project_name
    - npm install
 
-4. **Running the project:**
+4. **Running the server:**
+   - npm run server
+
+5. **Running the project:**
    - npm start
 
 
-5. **Accessing the project:**
-Open the project in your browser at: `http://localhost:3000` (or another port, if specified).
+6. **Accessing the project:**
+Open the project in your browser at: `http://localhost:3001` (or another port, if specified).

@@ -4,7 +4,7 @@ import { ProfileHeader, UserProfile } from './style';
 interface UserProfileHeaderProps {
   name: string;
   status: string;
-  buttonContent: string;
+  buttonContent?: string;  // Tornar a prop buttonContent opcional
   handleButton?: () => void;
 }
 
@@ -14,7 +14,6 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
   buttonContent,
   handleButton,
 }) => {
-
   return (
     <ProfileHeader>
       <UserProfile>
@@ -22,7 +21,10 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
         <h2>{name}</h2>
         <p>{status}</p>
       </UserProfile>
-      <button onClick={handleButton}>{buttonContent}</button>
+      {
+        // Renderizar o botão somente se buttonContent estiver definido
+        buttonContent && <button onClick={handleButton}>{buttonContent}</button>
+      }
     </ProfileHeader>
   );
 };

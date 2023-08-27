@@ -99,6 +99,16 @@
       "city": "São Carlos",
       "relationship": "Solteiro",
       "id": 10
+    },
+    {
+      "email": "a@email.com",
+      "password": "$2a$10$20gUQHTQ3q4wFSwS4dRkWORifLsZsEWlsmiETinGyIQiAOmxz427S",
+      "birthDate": "0010-10-10",
+      "profession": "Dev",
+      "country": "Brasil",
+      "city": "Descalvado",
+      "relationship": "Solteiro",
+      "id": 11
     }
   ]
 }

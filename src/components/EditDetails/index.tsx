@@ -1,5 +1,7 @@
 import { Details, ParagraphHiddenInMobile } from "./style";
+import { Navigate, useNavigate } from "react-router-dom";
 function EditDetails() {
+  const navigate = useNavigate();
   return (
     <Details>
       <div>
@@ -13,7 +15,7 @@ function EditDetails() {
         <h2>Filmes:</h2>
         <p>A rede social</p>
         <ParagraphHiddenInMobile>Meu amigo totoro</ParagraphHiddenInMobile>
-        <button>Ver todos</button>
+        <button onClick={() => navigate('/profile')}>Ver todos</button>
       </div>
     </Details>
   );
