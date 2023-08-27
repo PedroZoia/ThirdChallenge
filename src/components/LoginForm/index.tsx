@@ -26,6 +26,7 @@ import {
     PasswordInput,
     RememberMeContainer,
     RememberMeText,
+    ReminderText,
 } from './style';
 import { response } from 'express';
 import { error } from 'console';
@@ -60,6 +61,10 @@ function LoginForm() {
     const [registrationError, setRegistrationError] = useState('');
     const [isForgotPassword, setIsForgotPassword] = useState(false);
     const [recoveryEmail, setRecoveryEmail] = useState('');
+    const [recoveryCode, setRecoveryCode] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [isResetPasswordStep, setIsResetPasswordStep] = useState(false);
 
 
 
@@ -150,6 +155,7 @@ function LoginForm() {
     const handleBackToLogin = () => {
         setIsForgotPassword(false);
         setIsRegistrationForm(false);
+        setIsResetPasswordStep(false); 
     };
 
     const handleRegistration = async () => {
@@ -199,143 +205,180 @@ function LoginForm() {
         console.log(response);
     }
 
+    const handleSendCode = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsResetPasswordStep(true);
+    };
+
     return (
         <LoginFormContainer>
-            <LogoImage src={logo} alt="Logo" />
+    <LogoImage src={logo} alt="Logo" />
 
-            {isForgotPassword ? (
-                <>
-                    <LoginTitle>Recupere sua Senha</LoginTitle>
-                    <Form onSubmit={handleSubmit}>
-                        <EmailInput
-                            id="recoveryEmail"
-                            type="text"
-                            value={recoveryEmail}
-                            onChange={(e) => setRecoveryEmail(e.target.value)}
-                            placeholder="E-mail Cadastrado"
-                        />
-                        <LoginButton type="submit">Enviar código</LoginButton>
-                    </Form>
-                    <ForgotPasswordLink onClick={handleBackToLogin}>
-                        Lembrou sua senha?
-                    </ForgotPasswordLink>
-                    <ForgotPasswordLinkb onClick={handleBackToLogin} className="credentials-button">
-                        Entrar com as credenciais
-                    </ForgotPasswordLinkb>
-                </>
-            ) : (
-                <>
-                    <LoginTitle>{isRegistrationForm ? 'Cadastre-se no UOLkut' : 'Acesse o UOLkut'}</LoginTitle>
-                    <Form onSubmit={handleSubmit}>
-                        <EmailInput
-                            id="email"
-                            type="text"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            onBlur={handleEmailBlur}
-                            placeholder="E-mail"
-                        />
-                        {isLoginAttempted && emailError && (
+    {isResetPasswordStep ? (
+        <>
+            <LoginTitle>Nova Senha</LoginTitle>
+            <Form onSubmit={handleSubmit}> {/* handleSubmit aqui deve tratar da lógica de reset da senha */}
+                <EmailInput
+                    id="recoveryCode"
+                    type="text"
+                    value={recoveryCode}
+                    onChange={(e) => setRecoveryCode(e.target.value)}
+                    placeholder="Informe o código"
+                />
+                <PasswordInput
+                    id="newPassword"
+                    type="password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Nova senha"
+                />
+                <PasswordInput
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="Confirmar a senha"
+                />
+                <LoginButton type="submit">Salvar</LoginButton>
+            </Form>
+            <ReminderText>
+            Lembrou sua senha?
+            </ReminderText>
+            <ForgotPasswordLinkb onClick={handleBackToLogin} className="credentials-button">
+                Entrar com as credenciais
+            </ForgotPasswordLinkb>
+        </>
+    ) : isForgotPassword ? (
+        <>
+            <LoginTitle>Recupere sua Senha</LoginTitle>
+            <Form onSubmit={handleSendCode}>
+                <EmailInput
+                    id="recoveryEmail"
+                    type="text"
+                    value={recoveryEmail}
+                    onChange={(e) => setRecoveryEmail(e.target.value)}
+                    placeholder="E-mail Cadastrado"
+                />
+                <LoginButton type="submit">Enviar código</LoginButton>
+            </Form>
+            <ReminderText>
+            Lembrou sua senha?
+            </ReminderText>
+            <ForgotPasswordLinkb onClick={handleBackToLogin} className="credentials-button">
+                Entrar com as credenciais
+            </ForgotPasswordLinkb>
+        </>
+    ) : (
+        <>
+            <LoginTitle>{isRegistrationForm ? 'Cadastre-se no UOLkut' : 'Acesse o UOLkut'}</LoginTitle>
+            <Form onSubmit={handleSubmit}>
+                <EmailInput
+                    id="email"
+                    type="text"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onBlur={handleEmailBlur}
+                    placeholder="E-mail"
+                />
+                {isLoginAttempted && emailError && (
+                    <ErrorContainer>
+                        <ErrorMessage>{emailError}</ErrorMessage>
+                    </ErrorContainer>
+                )}
+                <PasswordInput
+                    id="password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    onBlur={handlePasswordBlur}
+                    placeholder="Senha"
+                />
+                {isLoginAttempted && passwordError && (
+                    <ErrorContainer>
+                        <ErrorMessage>{passwordError}</ErrorMessage>
+                    </ErrorContainer>
+                )}
+                {isRegistrationForm ? (
+                    <>
+                        <div className="inputRow">
+                            <BirthDateInput
+                                type="date"
+                                value={birthDate}
+                                onChange={(e) => setBirthDate(e.target.value)}
+                                placeholder="Data de Nascimento"
+                            />
+                            <ProfessionInput
+                                type="text"
+                                value={profession}
+                                onChange={(e) => setProfession(e.target.value)}
+                                placeholder="Profissão"
+                            />
+                        </div>
+                        <div className="inputRow">
+                            <CountryInput
+                                type="text"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                                placeholder="País"
+                            />
+                            <CityInput
+                                type="text"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                                placeholder="Cidade"
+                            />
+                        </div>
+                        <RelationshipSelect
+                            value={relationship}
+                            onChange={(e) => setRelationship(e.target.value)}
+                        >
+                            <option value="Solteiro">Solteiro</option>
+                            <option value="Casado">Casado</option>
+                            <option value="Divorciado">Divorciado</option>
+                            <option value="Namorando">Namorando</option>
+                            <option value="Preocupado">Preocupado</option>
+                        </RelationshipSelect>
+                        {isLoginAttempted && registrationError && (
                             <ErrorContainer>
-                                <ErrorMessage>{emailError}</ErrorMessage>
+                                <ErrorMessage>{registrationError}</ErrorMessage>
                             </ErrorContainer>
                         )}
-
-                        <PasswordInput
-                            id="password"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            onBlur={handlePasswordBlur}
-                            placeholder="Senha"
-                        />
-                        {isLoginAttempted && passwordError && (
+                        <LoginButton type="submit" onClick={handleRegistration}>Criar Conta</LoginButton>
+                    </>
+                ) : (
+                    <>
+                        {isLoginAttempted && loginError && (
                             <ErrorContainer>
-                                <ErrorMessage>{passwordError}</ErrorMessage>
+                                <ErrorMessage>{loginError}</ErrorMessage>
                             </ErrorContainer>
                         )}
+                        <RememberMeContainer>
+                            <CustomCheckboxInput
+                                id="rememberMe"
+                                type="checkbox"
+                                checked={rememberPassword}
+                                onChange={handleRememberMeChange}
+                            />
+                            <CustomCheckboxLabel htmlFor="rememberMe" />
+                            <label htmlFor="rememberMe">
+                                <RememberMeText>Lembrar minha senha</RememberMeText>
+                            </label>
+                        </RememberMeContainer>
 
-                        {isRegistrationForm ? (
-                            <>
-                                <div className="inputRow">
-                                    <BirthDateInput
-                                        type="date"
-                                        value={birthDate}
-                                        onChange={(e) => setBirthDate(e.target.value)}
-                                        placeholder="Data de Nascimento"
-                                    />
-                                    <ProfessionInput
-                                        type="text"
-                                        value={profession}
-                                        onChange={(e) => setProfession(e.target.value)}
-                                        placeholder="Profissão"
-                                    />
-                                </div>
-                                <div className="inputRow">
-                                    <CountryInput
-                                        type="text"
-                                        value={country}
-                                        onChange={(e) => setCountry(e.target.value)}
-                                        placeholder="País"
-                                    />
-                                    <CityInput
-                                        type="text"
-                                        value={city}
-                                        onChange={(e) => setCity(e.target.value)}
-                                        placeholder="Cidade"
-                                    />
-                                </div>
-                                <RelationshipSelect
-                                    value={relationship}
-                                    onChange={(e) => setRelationship(e.target.value)}
-                                >
-                                    <option value="Solteiro">Solteiro</option>
-                                    <option value="Casado">Casado</option>
-                                    <option value="Divorciado">Divorciado</option>
-                                    <option value="Namorando">Namorando</option>
-                                    <option value="Preocupado">Preocupado</option>
-                                </RelationshipSelect>
-                                {isLoginAttempted && registrationError && (
-                                    <ErrorContainer>
-                                        <ErrorMessage>{registrationError}</ErrorMessage>
-                                    </ErrorContainer>
-                                )}
-                                <LoginButton type="submit" onClick={handleRegistration}>Criar Conta</LoginButton>
-                            </>
-                        ) : (
-                            <>
-                                {isLoginAttempted && loginError && (
-                                    <ErrorContainer>
-                                        <ErrorMessage>{loginError}</ErrorMessage>
-                                    </ErrorContainer>
-                                )}
-                                <RememberMeContainer>
-                                    <CustomCheckboxInput
-                                        id="rememberMe"
-                                        type="checkbox"
-                                        checked={rememberPassword}
-                                        onChange={handleRememberMeChange}
-                                    />
-                                    <CustomCheckboxLabel htmlFor="rememberMe" />
-                                    <label htmlFor="rememberMe">
-                                        <RememberMeText>Lembrar minha senha</RememberMeText>
-                                    </label>
-                                </RememberMeContainer>
-
-                                <LoginButton type="submit" onClick={handleLogin}>Entrar na conta</LoginButton>
-                                <CreateAccountButton type="button" onClick={handleCreateProfile}>
-                                    Criar uma conta
-                                </CreateAccountButton>
-                                <ForgotPasswordLink title="Esqueci a minha senha" onClick={handleModal}>
-                                    Esqueci a minha senha
-                                </ForgotPasswordLink>
-                            </>
-                        )}
-                        {modalIsVisible && <Modal imageLogo={''} text='Acesse seu e-mail e verifique suas informações.' buttonContent='Retornar à página' buttonLink="/" />}
-                    </Form>
-                </>
-            )}
-        </LoginFormContainer>
+                        <LoginButton type="submit" onClick={handleLogin}>Entrar na conta</LoginButton>
+                        <CreateAccountButton type="button" onClick={handleCreateProfile}>
+                            Criar uma conta
+                        </CreateAccountButton>
+                        <ForgotPasswordLink title="Esqueci a minha senha" onClick={handleModal}>
+                            Esqueci a minha senha
+                        </ForgotPasswordLink>
+                    </>
+                )}
+            </Form>
+        </>
+    )}
+    {modalIsVisible && <Modal imageLogo={''} text='Acesse seu e-mail e verifique suas informações.' buttonContent='Retornar à página' buttonLink="/" />}
+</LoginFormContainer>
     );
 }
 

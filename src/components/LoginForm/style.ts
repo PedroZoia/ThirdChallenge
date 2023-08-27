@@ -276,6 +276,13 @@ const RememberMeText = styled.span`
     margin-left: 0.5rem; 
 `;
 
+const ReminderText = styled.p`
+    color: #ED6D25;
+    font-size: 0.875rem; 
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+`;
 
 
 export {
@@ -301,4 +308,5 @@ export {
     PasswordInput,
     RememberMeContainer,
     RememberMeText,
+    ReminderText,
 };

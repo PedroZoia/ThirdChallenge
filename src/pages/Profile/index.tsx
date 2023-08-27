@@ -37,7 +37,7 @@ function Profile() {
         name="Usuário"
         status="Solteiro, Brasil"
         buttonContent="Editar meu perfil"
-        handleButton={() => { navigate('/edit-profile')}}
+        handleButton={() => { navigate('/profile')}}
       />
       </div>
       <div className='ProfileInfoDiv'>
