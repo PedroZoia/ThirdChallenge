@@ -11,11 +11,14 @@ import starIcon from '../../assets/img/Star.svg';
 import heartIcon from '../../assets/img/Heart.svg';
 import smileyIcon from '../../assets/img/Smiley.svg';
 import thumbsUpIcon from '../../assets/img/ThumbsUp.svg';
+import { useContext } from 'react';
+import { UserContext } from '../../context/user-context';
 function ProfileInfo() {
+  const { userInfo } = useContext(UserContext)!;
   return (
     <>
       <ProfileInfoSection>
-        <h2>Boa tarde, Iuri Silva</h2>
+        <h2>Boa tarde</h2>
         <Triangle />
         <PhraseContainer>
           <p>Programar sem café é igual poeta sem poesia.</p>
@@ -52,11 +55,11 @@ function ProfileInfo() {
         <PersonalInformation>
           <div>
             <h3>Relacionamento:</h3>
-            <p>Solteiro</p>
+            <p>{userInfo?.relationship}</p>
           </div>
           <div>
             <h3>Aniversário:</h3>
-            <p>21 de julho</p>
+            <p>{userInfo?.birthDate}</p>
           </div>
           <div>
             <h3>Idade:</h3>
@@ -64,19 +67,19 @@ function ProfileInfo() {
           </div>     
           <div>
             <h3>Quem sou eu:</h3>
-            <p>Programador</p>
+            <p>{userInfo?.profession}</p>
           </div>
           <div>
             <h3>Moro:</h3>
-            <p>Guarantã</p>
+            <p>{userInfo?.city}</p>
           </div>
           <div>
             <h3>País:</h3>
-            <p>Brasil</p>
+            <p>{userInfo?.country}</p>
           </div>
           <div>
             <h3>Cidade:</h3>
-            <p>São Paulo</p>
+            <p>{userInfo?.city}</p>
           </div>
 
           <div style={{ height: '12.25rem' }} />

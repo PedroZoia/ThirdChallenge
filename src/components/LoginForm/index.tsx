@@ -55,11 +55,12 @@ function LoginForm() {
     const [rememberPassword, setRememberPassword] = useState(false);
     const [loginError, setLoginError] = useState('');
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-    const { setUserIsLogged, modalIsVisible, setModalIsVisible } = useContext(UserContext)!;
+    const { setUserIsLogged, modalIsVisible, setModalIsVisible, setUserInfo} = useContext(UserContext)!;
     const [isRegistrationForm, setIsRegistrationForm] = useState(false);
     const [registrationError, setRegistrationError] = useState('');
     const [isForgotPassword, setIsForgotPassword] = useState(false);
     const [recoveryEmail, setRecoveryEmail] = useState('');
+
 
 
     useEffect(() => {
@@ -78,17 +79,20 @@ function LoginForm() {
             let profile = {
                 email: email,
                 password: password,
-
             }
-            console.log(profile)
-            const response = await axios.post('http://localhost:3000/login', profile).then((response)=>{
-                console.log(response)
-                let data = response.data;
-             setUserIsLogged(true);
-             navigate('/profile');
-            }).catch((error)=>{console.log(error)});
-
-            console.log(response); 
+    
+            try {
+                const response = await axios.post('http://localhost:3000/login', profile);
+                console.log(response);
+                
+                // Armazene as informações do usuário no contexto após um login bem-sucedido
+                setUserInfo(response.data.user);  // Supondo que a resposta contenha as informações do usuário em 'data.user'
+                
+                setUserIsLogged(true);
+                navigate('/profile');
+            } catch (error) {
+                console.log(error);
+            }
         }
     };
 
