@@ -2,113 +2,13 @@
   "users": [
     {
       "email": "pedro@email.com",
-      "password": "$2a$10$toWTEaCfWsYF70q02sOtT.F9G26QpKmsZyxhCRSAEdPLFB9gr2boG",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 1
-    },
-    {
-      "email": "pedro1@email.com",
-      "password": "$2a$10$7UHDyo5JrzT3cdIAOasP4uZqTdLoLOdUswRz1VMJEJSDgN5jILOuS",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 2
-    },
-    {
-      "email": "pedro2@email.com",
-      "password": "$2a$10$cOQ6Vf41JsOwY7iVZVg4XecY9yhtSuRXrgOM2qP97lDNVvVFbW13S",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 3
-    },
-    {
-      "email": "pedro3@email.com",
-      "password": "$2a$10$WljY/5v9NbjXcp5nHl737uld2X6Ywqw28xSoibBLt5tazs6tOI3Xy",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "Namorando",
-      "id": 4
-    },
-    {
-      "email": "joao@email.com",
-      "password": "$2a$10$OTR2zXN3EcWmyB6TwmutnOmT7LW4fmDFHrp2VaVOxwtvEppfbJnpm",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 5
-    },
-    {
-      "email": "teste@email.com",
-      "password": "$2a$10$v5tWIy9CbMQb5pnYGciiw.wJYR5UDeeAzV9.YqSE.KvxmzZOGZ/mC",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 6
-    },
-    {
-      "email": "teste1@email.com",
-      "password": "$2a$10$zMcPfYmcidwuLWh54/JfuO1wjIo7NwDRMtlPt7DnCBjS6nxn76Ya.",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 7
-    },
-    {
-      "email": "gabriel@email.com",
-      "password": "$2a$10$y9D2.0slrOfPQAZfQFykLOZtD5wtowHp6MgUjmc.2H0E0JK7na.oi",
-      "birthDate": "0010-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "",
-      "id": 8
-    },
-    {
-      "email": "valida@email.com",
-      "password": "$2a$10$jRh1r3q.wiki3lEzWwYzk.H9MayxLZ6tusjG5oI7Fydld8mhrrodK",
-      "birthDate": "2001-10-10",
-      "profession": "a",
-      "country": "a",
-      "city": "a",
-      "relationship": "Casado",
-      "id": 9
-    },
-    {
-      "email": "testefinal@email.com",
-      "password": "$2a$10$e9sy9tfZkddKYgebp7mit.emMqw7MbiLcx/pRHuhSnQ7wLvHqHmHS",
+      "password": "$2a$10$oIx.9lhPTDn1aGhP7TNdPuedFyS1U/C8NCEELnI8Ar8kG4/0O31wa",
       "birthDate": "2001-06-26",
-      "profession": "Dev",
+      "profession": "Desenvolvedor",
       "country": "Brasil",
       "city": "São Carlos",
-      "relationship": "Solteiro",
-      "id": 10
-    },
-    {
-      "email": "a@email.com",
-      "password": "$2a$10$20gUQHTQ3q4wFSwS4dRkWORifLsZsEWlsmiETinGyIQiAOmxz427S",
-      "birthDate": "0010-10-10",
-      "profession": "Dev",
-      "country": "Brasil",
-      "city": "Descalvado",
-      "relationship": "Solteiro",
-      "id": 11
+      "relationship": "Namorando",
+      "id": 1
     }
   ]
 }

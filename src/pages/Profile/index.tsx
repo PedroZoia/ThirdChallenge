@@ -7,6 +7,7 @@ import ListOfCommunity from '../../components/ListOfCommunity';
 import ProfileInfo from '../../components/ProfileInfo';
 import { UserContext } from '../../context/user-context';
 import { useNavigate } from 'react-router';
+
 function Profile() {
  // Getting the setUserIsLogged function from the UserContext using the useContext hook
  const {setUserIsLogged} = useContext(UserContext)!;
@@ -33,7 +34,7 @@ function Profile() {
       </div>
       <div className='profileHeaderDiv'>
       <UserProfileHeader
-        name="Iuri Silva"
+        name="Usuário"
         status="Solteiro, Brasil"
         buttonContent="Editar meu perfil"
         handleButton={() => { navigate('/edit-profile')}}

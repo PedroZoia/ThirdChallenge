@@ -39,7 +39,7 @@ function Header() {
       </InputContent>
       <PerfilContent>
         <img src='https://i.imgur.com/jguCgC7.png' alt="" />
-        <p>Iuri Silva</p>
+        <p>Usuário</p>
         <img src={caretIcon} alt="" />
         </PerfilContent>
       </ContainerInputWUser>
