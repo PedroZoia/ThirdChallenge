@@ -3,14 +3,15 @@ import { ProfileHeader, UserProfile } from './style';
 
 interface UserProfileHeaderProps {
   name: string;
-  status: string;
-  buttonContent?: string;  // Tornar a prop buttonContent opcional
+  country: string;
+  relationship: string;
+  buttonContent?: string;
   handleButton?: () => void;
 }
-
 const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
   name,
-  status,
+  country,
+  relationship, 
   buttonContent,
   handleButton,
 }) => {
@@ -19,10 +20,9 @@ const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({
       <UserProfile>
         <img src='https://i.imgur.com/jguCgC7.png' alt="" />
         <h2>{name}</h2>
-        <p>{status}</p>
+        <p>{relationship}, {country}</p>
       </UserProfile>
       {
-        // Renderizar o botão somente se buttonContent estiver definido
         buttonContent && <button onClick={handleButton}>{buttonContent}</button>
       }
     </ProfileHeader>

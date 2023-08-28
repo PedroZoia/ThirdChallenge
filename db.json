@@ -9,6 +9,16 @@
       "city": "São Carlos",
       "relationship": "Namorando",
       "id": 1
+    },
+    {
+      "email": "layla@email.com",
+      "password": "$2a$10$m.i5ZGwXdBrYxVu2RivE.e7Ju.631yAQFpELoqJemwCZUeALFNFoe",
+      "birthDate": "2003-10-14",
+      "profession": "Designer",
+      "country": "Brasil",
+      "city": "Curitiba",
+      "relationship": "Solteiro",
+      "id": 2
     }
   ]
 }

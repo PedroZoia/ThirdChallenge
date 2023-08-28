@@ -15,6 +15,18 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/user-context';
 function ProfileInfo() {
   const { userInfo } = useContext(UserContext)!;
+  const calculateAge = (birthdate: string): number | null => {
+    if (!birthdate) return null;
+
+    let today = new Date();
+    let birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let month = today.getMonth() - birthDate.getMonth();
+    if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
+}
   return (
     <>
       <ProfileInfoSection>
@@ -63,7 +75,7 @@ function ProfileInfo() {
           </div>
           <div>
             <h3>Idade:</h3>
-            <p>22</p>
+            <p>{calculateAge(userInfo?.birthDate ?? '')}</p>
           </div>     
           <div>
             <h3>Quem sou eu:</h3>

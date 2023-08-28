@@ -23,10 +23,6 @@ function EditProfile() {
     <>
     <Container>
       <ProfileSide>
-      <UserProfileHeader
-        name="Iuri Silva"
-        status="Solteiro, Brasil"
-      />
       </ProfileSide>
       <EditForm />
     </Container>
