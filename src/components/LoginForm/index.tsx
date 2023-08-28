@@ -91,7 +91,7 @@ function LoginForm() {
                 console.log(response);
                 
                 // Armazene as informações do usuário no contexto após um login bem-sucedido
-                setUserInfo(response.data.user);  // Supondo que a resposta contenha as informações do usuário em 'data.user'
+                setUserInfo(response.data.user);  
                 
                 setUserIsLogged(true);
                 navigate('/profile');
@@ -195,7 +195,7 @@ function LoginForm() {
             console.log(response)
             let data = response.data;
     
-            setIsRegistrationForm(false);  // Adicione esta linha
+            setIsRegistrationForm(false); 
             navigate('/');
     
         }).catch((error) => {
@@ -217,7 +217,7 @@ function LoginForm() {
     {isResetPasswordStep ? (
         <>
             <LoginTitle>Nova Senha</LoginTitle>
-            <Form onSubmit={handleSubmit}> {/* handleSubmit aqui deve tratar da lógica de reset da senha */}
+            <Form onSubmit={handleSubmit}> {}
                 <EmailInput
                     id="recoveryCode"
                     type="text"
